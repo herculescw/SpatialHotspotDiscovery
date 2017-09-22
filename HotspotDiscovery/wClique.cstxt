@@ -1,0 +1,317 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AirPollution
+{
+   
+public static class GlobalMembersWclique2
+{
+	/* wclique.c exact algorithm for finding one maximum-weight 
+	   clique in an arbitrary graph,
+	   10.2.2000, Patric R. J. Ostergard, 
+	   patric.ostergard@hut.fi */
+
+	/* compile: gcc wclique.c -o wclique -O2 */
+
+	/* usage: wclique infile */
+
+	/* infile format: see http://www.tcs.hut.fi/~pat/wclique.html */
+
+
+	//C++ TO C# CONVERTER NOTE: The following #define macro was replaced in-line:
+	//ORIGINAL LINE: #define INT_SIZE (8*sizeof(int))
+	//C++ TO C# CONVERTER NOTE: The following #define macro was replaced in-line:
+	//ORIGINAL LINE: #define is_edge(a,b) (bit[a][b/INT_SIZE]&(mask[b%INT_SIZE]))
+
+	public static int Vnbr; // number of vertices/edges
+	public static int Enbr;
+	public static int[] clique = new int[DefineConstants.MAX_VERTEX]; // table for pruning
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+     private static int[,] bit = new int[DefineConstants.MAX_VERTEX,DefineConstants.MAX_VERTEX / 8 * 4 + 1];
+	public static int[] wt = new int[DefineConstants.MAX_VERTEX];
+
+	public static int[] pos = new int[DefineConstants.MAX_VERTEX]; // reordering function
+	public static int[] set = new int[DefineConstants.MAX_VERTEX]; // current clique
+	public static int[] rec = new int[DefineConstants.MAX_VERTEX]; // best clique so far
+	public static int record; // weight of best clique
+	public static int rec_level; // # of vertices in best clique
+
+//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+	//uint mask[8 sizeof(int NamelessParameter)];
+//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+	//void graph(); // reads graph
+
+	//public static tms bf = new tms();
+	public static int timer1;
+	public static double timer11;
+
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	//main(argc,argv) int argc;
+	public void run()
+	{
+	  int i;
+	  int j;
+	  int k;
+	  int p;
+	  int min_wt;
+	  int max_nwt;
+	  int wth;
+	  int[] newarr = new int[DefineConstants.MAX_VERTEX];
+	  int[] used = new int[DefineConstants.MAX_VERTEX];
+	  int[] nwt = new int[DefineConstants.MAX_VERTEX];
+	  int ok;
+	  int thisround;
+	  int count;
+	  int[] saved = new int[DefineConstants.MAX_VERTEX];
+	  string infile;
+	  int[]mask  = new int[8]; 
+	  /* read input */
+//C++ TO C# CONVERTER TODO TASK: The following method format was not recognized, possibly due to an unrecognized macro:
+	  if (argc < 2)
+	  {
+		Console.Write("Usage: wclique infile\n");
+		Environment.Exit(1);
+	  }
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	  //if ((infile = fopen(argv[1],"r")) == null)
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	//	fileerror();
+
+	  /* initialize mask */
+	   mask[0] = 1;
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	  for (i = 1;i < 8 * sizeof(int);i++)
+		 mask[i] = mask[i - 1] << 1;
+
+	  /* read graph */
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	  //graph(infile);
+
+	  /* order vertices */
+//C++ TO C# CONVERTER TODO TASK: The following method format was not recognized, possibly due to an unrecognized macro:
+	  for (i = 0;i < Vnbr;i++)
+	  {
+		nwt[i] = 0;
+		for (j = 0;j < Vnbr;j++)
+		{
+		  if (((bit[i,j / 8 * 4] & (mask[j % 8 * sizeof(int)]))) != 0)
+		  {
+			  nwt[i] += wt[j];
+		  }
+		}
+	  }
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	  for (i = 0;i < Vnbr;i++)
+		used[i] = DefineConstants.FALSE;
+//C++ TO C# CONVERTER TODO TASK: The following statement was not recognized, possibly due to an unrecognized macro:
+	  count = 0;
+	  do
+	  {
+		thisround = 0;
+		do
+		{
+		   min_wt = DefineConstants.MAX_WEIGHT + 1;
+		   max_nwt = -1;
+		   ok = DefineConstants.FALSE;
+		   for (i = Vnbr - 1;i >= 0;i--)
+		   {
+			 if ((used[i] == 0) && (wt[i] < min_wt))
+			 {
+			   min_wt = wt[i];
+			 }
+		   }
+		   for (i = Vnbr - 1;i >= 0;i--)
+		   {
+			 if (used[i] != 0 || (wt[i] > min_wt))
+				 continue;
+			 for (j = 0;j < thisround;j++)
+			 {
+			   if (((bit[i,saved[j] / 4] & (mask[saved[j] % 8 * sizeof(int)]))) != 0)
+			   {
+				   goto anytt;
+			   }
+			 }
+			 ok = 1;
+			 if (nwt[i] > max_nwt)
+			 {
+			   max_nwt = nwt[i];
+			   p = i;
+			 }
+			 anytt:
+		   }
+		   if (ok != 0)
+		   {
+			 pos[count++] = p;
+			 used[p] = DefineConstants.TRUE;
+		 saved[thisround++] = p;
+			 for (j = 0;j < Vnbr;j++)
+			 {
+			   if ((used[j] == 0) && (j != p) && ((bit[p,j / 8 * sizeof(int)] & (mask[j % 8 * sizeof(int)]))))
+			   {
+				 nwt[j] -= wt[p];
+			   }
+			 }
+		   }
+		} while (ok != 0);
+	  } while (count < Vnbr);
+
+	  /* main routine */
+	  record = 0;
+	  wth = 0;
+	  for (i = 0;i < Vnbr;i++)
+	  {
+		 wth += wt[pos[i]];
+		 sub(i, pos, 0, 0, wth);
+		 clique[pos[i]] = record;
+		// times(bf);
+		// timer11 = (bf.tms_utime - timer1) / 100.0;
+		 Console.Write("level = {0,3:D}({1:D}) best = {2,2:D} time = {3,8:f2}\n",i + 1,Vnbr,record,timer11);
+	  }
+	  Console.Write("Record: ");
+	  for (i = 0;i < rec_level;i++)
+	  {
+		Console.Write("{0:D} ",rec[i]);
+	  }
+	  Console.Write("\n");
+	}
+
+	int sub(ct,table,level,weight,l_weight) int ct;
+	int level;
+	int weight;
+	int l_weight;
+	int[] table;
+	{
+//C++ TO C# CONVERTER NOTE: 'register' variable declarations are not supported in C#:
+//ORIGINAL LINE: register int i,j,k;
+	  int i;
+	  int j;
+	  int k;
+	  int best;
+	  int curr_weight;
+	  int left_weight;
+	  int[] newtable = new int[DefineConstants.MAX_VERTEX];
+//C++ TO C# CONVERTER TODO TASK: C# does not have an equivalent for pointers to value types:
+//ORIGINAL LINE: int *p1,*p2;
+	  int p1;
+//C++ TO C# CONVERTER TODO TASK: C# does not have an equivalent for pointers to value types:
+//ORIGINAL LINE: int *p2;
+	  int p2;
+
+	  if (ct <= 0)
+	  { // 0 or 1 elements left; include these
+		if (ct == 0)
+		{
+		  set[level++] = table[0];
+		  weight += l_weight;
+		}
+		if (weight > record)
+		{
+		  record = weight;
+		  rec_level = level;
+		  for (i = 0;i < level;i++)
+		  {
+			  rec[i] = set[i];
+		  }
+		}
+		return 0;
+	  }
+	  for (i = ct;i >= 0;i--)
+	  {
+		if ((level == 0) && (i < ct))
+		{
+			return 0;
+		}
+		k = table[i];
+		if ((level > 0) && (clique[k] <= (record - weight)))
+		{
+			return 0; // prune
+		}
+		set[level] = k;
+		curr_weight = weight + wt[k];
+		l_weight -= wt[k];
+		if (l_weight <= (record - curr_weight))
+		{
+			return 0; // prune
+		}
+		p1 = newtable;
+		p2 = table;
+		left_weight = 0;
+		while (p2 < table + i)
+		{
+		  j = p2++;
+		  if (((bit[j][k / 8 * sizeof(int)] & (mask[k % 8 * sizeof(int)]))) != 0)
+		  {
+		p1++= j;
+			left_weight += wt[j];
+		  }
+		}
+		if (left_weight <= (record - curr_weight))
+			continue;
+		sub(p1 - newtable-1, newtable, level + 1, curr_weight, left_weight);
+	  }
+	  return 0;
+	}
+
+	void graph(fp) FILE * fp;
+	{
+//C++ TO C# CONVERTER NOTE: 'register' variable declarations are not supported in C#:
+//ORIGINAL LINE: register int i,j,k;
+	  int i;
+	  int j;
+	  int k;
+	  int weight;
+	  int degree;
+	  int entry;
+
+	  if (!fscanf(fp, "%d %d\n", Vnbr, Enbr))
+	  {
+		fileerror();
+	  }
+	  for (i = 0;i < Vnbr;i++) // empty graph table
+	  {
+		for (j = 0;j < Vnbr / 8 * sizeof(int) + 1;j++)
+		{
+		  bit[i][j] = 0;
+		}
+	  }
+	  for (i = 0;i < Vnbr;i++)
+	  {
+		if (!fscanf(fp, "%d %d", weight, degree))
+		{
+		  fileerror();
+		}
+		wt[i] = weight;
+		for (j = 0;j < degree;j++)
+		{
+		  if (!fscanf(fp, "%d", entry))
+		  {
+			fileerror();
+		  }
+		  bit[i][entry / 8 * sizeof(int)] |= mask[entry % 8 * sizeof(int)]; // record edge
+		}
+	  }
+	  fclose(fp);
+	}
+
+	int fileerror()
+	{
+	  Console.Write("Error in graph file\n");
+	  exit();
+	}
+
+}
+
+internal static partial class DefineConstants
+{
+	public const int TRUE = 1;
+	public const int FALSE = 0;
+	public const int MAX_VERTEX = 2000; // maximum number of vertices
+	public const int MAX_WEIGHT = 1000000; // maximum weight of vertex
+}
+
+}

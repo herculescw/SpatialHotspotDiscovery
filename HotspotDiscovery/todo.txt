@@ -1,0 +1,7 @@
+﻿1. use interfaces instead of functions for interestingness calculation
+2. use interfaces for neighborhood calculation
+3. A hybrid-growing strategy: grow dimensionally as long as interestingness is very high, then switch to cell-by-cell. 
+    No need for merging seeds if this is done. (just eliminate included seeds)
+4. Implement Mosaic for clustering and compare results.
+5. Use point sets: create neighborhood graph using SNN and use kNN interestingness for seeding.
+

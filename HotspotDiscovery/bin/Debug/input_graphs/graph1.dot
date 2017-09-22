@@ -1,0 +1,30 @@
+graph G {
+0 [style=bold, label="1 (1062)"];
+1 [style=bold, label="2 (558)"];
+2 [style=bold, label="3 (960)"];
+3 [style=bold, label="4 (987)"];
+4 [style=bold, label="5 (2284)"];
+5 [style=bold, label="6 (630)"];
+6 [style=bold, label="7 (2271)"];
+7 [style=bold, label="8 (363)"];
+8 [style=bold, label="9 (1070)"];
+9 [style=bold, label="10 (865)"];
+10 [style=bold, label="11 (1033)"];
+3 -- 0 [ color="blue"];
+8 -- 0 [ color="blue"];
+9 -- 0 [ color="blue"];
+5 -- 1 [ color="blue"];
+7 -- 1 [ color="blue"];
+3 -- 2 [ color="blue"];
+6 -- 2 [ color="blue"];
+8 -- 2 [ color="blue"];
+10 -- 2 [ color="blue"];
+8 -- 3 [ color="blue"];
+9 -- 3 [ color="blue"];
+10 -- 3 [ color="blue"];
+6 -- 4 [ color="blue"];
+10 -- 4 [ color="blue"];
+9 -- 5 [ color="blue"];
+10 -- 6 [ color="blue"];
+9 -- 8 [ color="blue"];
+}

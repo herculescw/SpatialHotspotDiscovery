@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{58560F53-8DE7-4927-AB1F-9460AB8B35A5}|Default">
+  <MonoDevelop.Ide.ItemProperties.HotspotDiscovery PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ClusterAggregation/ClusterAggregator.cs">
+    <Files>
+      <File FileName="Settings.cs" Line="22" Column="20" />
+      <File FileName="todo.txt" Line="8" Column="1" />
+      <File FileName="ClusterAggregation/Cluster.cs" Line="1" Column="1" />
+      <File FileName="ClusterAggregation/ClusterAggregator.cs" Line="133" Column="76" />
+      <File FileName="ClusterAggregation/ClusterAggregatorDbScan.cs" Line="14" Column="41" />
+      <File FileName="ClusterAggregation/ClusterObject.cs" Line="17" Column="1" />
+      <File FileName="FileDotEngine.cs" Line="4" Column="17" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

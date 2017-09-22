@@ -1,0 +1,10 @@
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/HotspotDiscovery.exe.config
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/HotspotDiscovery.exe.mdb
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/HotspotDiscovery.exe
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/obj/Debug/HotspotDiscovery.exe
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/obj/Debug/HotspotDiscovery.exe.mdb
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/QuickGraph.dll
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/QuickGraph.Data.dll
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/QuickGraph.Graphviz.dll
+/Users/fatihakdag/Desktop/UH/TSAS paper/SpatialHotspotDiscovery/HotspotDiscovery/bin/Debug/QuickGraph.Serialization.dll
